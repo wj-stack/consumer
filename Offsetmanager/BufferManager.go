@@ -1,6 +1,7 @@
 package Offsetmanager
 
 import (
+	"fmt"
 	"sync"
 
 	"github.com/liyue201/gostl/ds/queue"
@@ -42,9 +43,10 @@ func (x *BufferManager) Pop() {
 
 func (x *BufferManager) CheckAndUpdata() {
 
-	var buf = x.q.Front().(Buffer)
+	var buf = x.q.Front().(*Buffer)
 	if buf.Num == buf.Target {
 		x.q.Pop() // 说明被消费掉了
+		fmt.Println(buf.Data, "consumed")
 	}
 }
 
